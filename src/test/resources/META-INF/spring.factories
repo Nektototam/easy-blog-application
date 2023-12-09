@@ -1,0 +1,3 @@
+org.springframework.test.context.ContextCustomizerFactory = org.nektototam.\
+    easyblog.config.TestContainersSpringContextCustomizerFactory,org.nektototam.\
+    easyblog.config.SqlTestContainersSpringContextCustomizerFactory
