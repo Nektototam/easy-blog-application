@@ -1,0 +1,29 @@
+{
+  "easyBlogApp": {
+    "taggedItems": {
+      "home": {
+        "title": "Tagged Items",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Tagged Items",
+        "createOrEditLabel": "Create or edit a Tagged Items",
+        "search": "Search for Tagged Items",
+        "notFound": "No Tagged Items found"
+      },
+      "created": "A new Tagged Items is created with identifier {{ param }}",
+      "updated": "A Tagged Items is updated with identifier {{ param }}",
+      "deleted": "A Tagged Items is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tagged Items {{ id }}?"
+      },
+      "detail": {
+        "title": "Tagged Items"
+      },
+      "id": "ID",
+      "itemType": "Item Type",
+      "tag": "Tag",
+      "item": "Item",
+      "page": "Page",
+      "post": "Post"
+    }
+  }
+}

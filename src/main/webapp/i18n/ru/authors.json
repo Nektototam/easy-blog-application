@@ -1,0 +1,27 @@
+{
+  "easyBlogApp": {
+    "authors": {
+      "home": {
+        "title": "Authors",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Authors",
+        "createOrEditLabel": "Создать или отредактировать Authors",
+        "search": "Найти Authors",
+        "notFound": "Authors не найдено"
+      },
+      "created": "Новый Authors создан с идентификатором {{ param }}",
+      "updated": "Authors обновлен с идентификатором {{ param }}",
+      "deleted": "Authors удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Authors {{ id }}?"
+      },
+      "detail": {
+        "title": "Authors"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "url": "Url"
+    }
+  }
+}

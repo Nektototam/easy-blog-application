@@ -1,0 +1,29 @@
+{
+  "easyBlogApp": {
+    "taggedItems": {
+      "home": {
+        "title": "Tagged Items",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Tagged Items",
+        "createOrEditLabel": "Создать или отредактировать Tagged Items",
+        "search": "Найти Tagged Items",
+        "notFound": "Tagged Items не найдено"
+      },
+      "created": "Новый Tagged Items создан с идентификатором {{ param }}",
+      "updated": "Tagged Items обновлен с идентификатором {{ param }}",
+      "deleted": "Tagged Items удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Tagged Items {{ id }}?"
+      },
+      "detail": {
+        "title": "Tagged Items"
+      },
+      "id": "ID",
+      "itemType": "Item Type",
+      "tag": "Tag",
+      "item": "Item",
+      "page": "Page",
+      "post": "Post"
+    }
+  }
+}

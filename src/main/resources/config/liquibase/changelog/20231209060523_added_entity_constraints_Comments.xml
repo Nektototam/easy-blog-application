@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Comments.
+    -->
+    <changeSet id="20231209060523-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="comments"
+                                 constraintName="fk_comments__author_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="authors"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="comments_id"
+                                 baseTableName="rel_comments__post"
+                                 constraintName="fk_rel_comments__post__comments_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comments"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="rel_comments__post"
+                                 constraintName="fk_rel_comments__post__post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="posts"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="comments_id"
+                                 baseTableName="rel_comments__page"
+                                 constraintName="fk_rel_comments__page__comments_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comments"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="page_id"
+                                 baseTableName="rel_comments__page"
+                                 constraintName="fk_rel_comments__page__page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pages"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="comments_id"
+                                 baseTableName="rel_comments__parent"
+                                 constraintName="fk_rel_comments__parent__comments_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comments"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="rel_comments__parent"
+                                 constraintName="fk_rel_comments__parent__parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comments"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+{
+  "easyBlogApp": {
+    "tags": {
+      "home": {
+        "title": "Tags",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Tags",
+        "createOrEditLabel": "Создать или отредактировать Tags",
+        "search": "Найти Tags",
+        "notFound": "Tags не найдено"
+      },
+      "created": "Новый Tags создан с идентификатором {{ param }}",
+      "updated": "Tags обновлен с идентификатором {{ param }}",
+      "deleted": "Tags удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Tags {{ id }}?"
+      },
+      "detail": {
+        "title": "Tags"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

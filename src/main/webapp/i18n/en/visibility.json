@@ -1,0 +1,9 @@
+{
+  "easyBlogApp": {
+    "Visibility": {
+      "null": "",
+      "PUBLIC": "PUBLIC",
+      "PRIVATE": "PRIVATE"
+    }
+  }
+}

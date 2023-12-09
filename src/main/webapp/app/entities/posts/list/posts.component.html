@@ -1,0 +1,163 @@
+<div>
+  <h2 id="page-heading" data-cy="PostsHeading">
+    <span jhiTranslate="easyBlogApp.posts.home.title">Posts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyBlogApp.posts.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-posts"
+        [routerLink]="['/posts/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="easyBlogApp.posts.home.createLabel">Create a new Posts</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="easyBlogApp.posts.home.search">Search for Posts</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'easyBlogApp.posts.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="posts?.length === 0">
+    <span jhiTranslate="easyBlogApp.posts.home.notFound">No Posts found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="posts && posts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="title">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.title">Title</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="slug">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.slug">Slug</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="html">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.html">Html</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdAt">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.createdAt">Created At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedAt">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.updatedAt">Updated At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="publishedAt">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.publishedAt">Published At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.status">Status</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="visibility">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.visibility">Visibility</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="author.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.posts.author">Author</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let posts of posts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/posts', posts.id, 'view']">{{ posts.id }}</a>
+          </td>
+          <td>{{ posts.title }}</td>
+          <td>{{ posts.slug }}</td>
+          <td>{{ posts.html }}</td>
+          <td>{{ posts.createdAt | formatMediumDatetime }}</td>
+          <td>{{ posts.updatedAt | formatMediumDatetime }}</td>
+          <td>{{ posts.publishedAt | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'easyBlogApp.Status.' + posts.status }}">{{ posts.status }}</td>
+          <td jhiTranslate="{{ 'easyBlogApp.Visibility.' + posts.visibility }}">{{ posts.visibility }}</td>
+          <td>
+            <span *ngFor="let author of posts.authors; let last = last">
+              <a class="form-control-static" [routerLink]="['/users', author.id, 'view']">{{ author.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/posts', posts.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </a>
+
+              <a [routerLink]="['/posts', posts.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(posts)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209055923",
+  "entityTableName": "item_types",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "ItemTypes",
+  "relationships": []
+}

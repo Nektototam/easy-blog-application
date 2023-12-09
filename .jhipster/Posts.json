@@ -1,0 +1,66 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209060323",
+  "entityTableName": "posts",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "slug",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "html",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "publishedAt",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "PUBLISHED,DRAFT,APPROVED,UNAPPROVED"
+    },
+    {
+      "fieldName": "visibility",
+      "fieldType": "Visibility",
+      "fieldValues": "PUBLIC,PRIVATE"
+    }
+  ],
+  "name": "Posts",
+  "relationships": [
+    {
+      "otherEntityName": "users",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "author",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "taggedItems",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "tag",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "comments",
+      "otherEntityRelationshipName": "post",
+      "relationshipName": "comment",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}

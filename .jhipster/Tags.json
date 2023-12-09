@@ -1,0 +1,18 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209060023",
+  "entityTableName": "tags",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Tags",
+  "relationships": []
+}

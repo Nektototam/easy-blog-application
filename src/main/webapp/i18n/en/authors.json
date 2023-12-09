@@ -1,0 +1,27 @@
+{
+  "easyBlogApp": {
+    "authors": {
+      "home": {
+        "title": "Authors",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Authors",
+        "createOrEditLabel": "Create or edit a Authors",
+        "search": "Search for Authors",
+        "notFound": "No Authors found"
+      },
+      "created": "A new Authors is created with identifier {{ param }}",
+      "updated": "A Authors is updated with identifier {{ param }}",
+      "deleted": "A Authors is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Authors {{ id }}?"
+      },
+      "detail": {
+        "title": "Authors"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "url": "Url"
+    }
+  }
+}

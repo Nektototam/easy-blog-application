@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="pages">
+      <h2 data-cy="pagesDetailsHeading"><span jhiTranslate="easyBlogApp.pages.detail.title">Pages</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ pages.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.title">Title</span></dt>
+        <dd>
+          <span>{{ pages.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.slug">Slug</span></dt>
+        <dd>
+          <span>{{ pages.slug }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.html">Html</span></dt>
+        <dd>
+          <span>{{ pages.html }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ pages.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.updatedAt">Updated At</span></dt>
+        <dd>
+          <span>{{ pages.updatedAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.publishedAt">Published At</span></dt>
+        <dd>
+          <span>{{ pages.publishedAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyBlogApp.Status.' + pages.status }}">{{ pages.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.visibility">Visibility</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyBlogApp.Visibility.' + pages.visibility }}">{{ pages.visibility }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.pages.author">Author</span></dt>
+        <dd>
+          <span *ngFor="let author of pages.authors; let last = last">
+            <a [routerLink]="['/users', author.id, 'view']">{{ author.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/pages', pages.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

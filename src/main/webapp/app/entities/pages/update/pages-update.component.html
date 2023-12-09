@@ -1,0 +1,127 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-pages-heading" data-cy="PagesCreateUpdateHeading" jhiTranslate="easyBlogApp.pages.home.createOrEditLabel">
+        Create or edit a Pages
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.slug" for="field_slug">Slug</label>
+          <input type="text" class="form-control" name="slug" id="field_slug" data-cy="slug" formControlName="slug" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.html" for="field_html">Html</label>
+          <textarea class="form-control" name="html" id="field_html" data-cy="html" formControlName="html"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.createdAt" for="field_createdAt">Created At</label>
+          <div class="d-flex">
+            <input
+              id="field_createdAt"
+              data-cy="createdAt"
+              type="datetime-local"
+              class="form-control"
+              name="createdAt"
+              formControlName="createdAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.updatedAt" for="field_updatedAt">Updated At</label>
+          <div class="d-flex">
+            <input
+              id="field_updatedAt"
+              data-cy="updatedAt"
+              type="datetime-local"
+              class="form-control"
+              name="updatedAt"
+              formControlName="updatedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.publishedAt" for="field_publishedAt">Published At</label>
+          <div class="d-flex">
+            <input
+              id="field_publishedAt"
+              data-cy="publishedAt"
+              type="datetime-local"
+              class="form-control"
+              name="publishedAt"
+              formControlName="publishedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'easyBlogApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'easyBlogApp.Status.' + status | translate }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.pages.visibility" for="field_visibility">Visibility</label>
+          <select class="form-control" name="visibility" formControlName="visibility" id="field_visibility" data-cy="visibility">
+            <option [ngValue]="null">{{ 'easyBlogApp.Visibility.null' | translate }}</option>
+            <option *ngFor="let visibility of visibilityValues" [value]="visibility">
+              {{ 'easyBlogApp.Visibility.' + visibility | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="easyBlogApp.pages.author" for="field_authors">Author</label>
+          <select
+            class="form-control"
+            id="field_authors"
+            data-cy="author"
+            multiple
+            name="authors"
+            formControlName="authors"
+            [compareWith]="compareUsers"
+          >
+            <option [ngValue]="usersOption" *ngFor="let usersOption of usersSharedCollection">{{ usersOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

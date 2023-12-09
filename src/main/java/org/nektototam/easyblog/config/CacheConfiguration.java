@@ -48,6 +48,28 @@ public class CacheConfiguration {
             createCache(cm, org.nektototam.easyblog.domain.User.class.getName());
             createCache(cm, org.nektototam.easyblog.domain.Authority.class.getName());
             createCache(cm, org.nektototam.easyblog.domain.User.class.getName() + ".authorities");
+            createCache(cm, org.nektototam.easyblog.domain.Authors.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.ItemTypes.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.Tags.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.Users.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.Users.class.getName() + ".pages");
+            createCache(cm, org.nektototam.easyblog.domain.Users.class.getName() + ".posts");
+            createCache(cm, org.nektototam.easyblog.domain.Pages.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.Pages.class.getName() + ".authors");
+            createCache(cm, org.nektototam.easyblog.domain.Pages.class.getName() + ".tags");
+            createCache(cm, org.nektototam.easyblog.domain.Pages.class.getName() + ".comments");
+            createCache(cm, org.nektototam.easyblog.domain.Posts.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.Posts.class.getName() + ".authors");
+            createCache(cm, org.nektototam.easyblog.domain.Posts.class.getName() + ".tags");
+            createCache(cm, org.nektototam.easyblog.domain.Posts.class.getName() + ".comments");
+            createCache(cm, org.nektototam.easyblog.domain.TaggedItems.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.TaggedItems.class.getName() + ".pages");
+            createCache(cm, org.nektototam.easyblog.domain.TaggedItems.class.getName() + ".posts");
+            createCache(cm, org.nektototam.easyblog.domain.Comments.class.getName());
+            createCache(cm, org.nektototam.easyblog.domain.Comments.class.getName() + ".posts");
+            createCache(cm, org.nektototam.easyblog.domain.Comments.class.getName() + ".pages");
+            createCache(cm, org.nektototam.easyblog.domain.Comments.class.getName() + ".parents");
+            createCache(cm, org.nektototam.easyblog.domain.Comments.class.getName() + ".children");
             // jhipster-needle-ehcache-add-entry
         };
     }
