@@ -1,0 +1,170 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-comments-heading" data-cy="CommentsCreateUpdateHeading" jhiTranslate="easyBlogApp.comments.home.createOrEditLabel">
+        Create or edit a Comments
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.comments.content" for="field_content">Content</label>
+          <textarea class="form-control" name="content" id="field_content" data-cy="content" formControlName="content"></textarea>
+          <div *ngIf="editForm.get('content')!.invalid && (editForm.get('content')!.dirty || editForm.get('content')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('content')?.errors?.required" jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.comments.createdAt" for="field_createdAt">Created At</label>
+          <div class="d-flex">
+            <input
+              id="field_createdAt"
+              data-cy="createdAt"
+              type="datetime-local"
+              class="form-control"
+              name="createdAt"
+              formControlName="createdAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('createdAt')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('createdAt')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+              >This field should be a date and time.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.comments.updatedAt" for="field_updatedAt">Updated At</label>
+          <div class="d-flex">
+            <input
+              id="field_updatedAt"
+              data-cy="updatedAt"
+              type="datetime-local"
+              class="form-control"
+              name="updatedAt"
+              formControlName="updatedAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('updatedAt')!.invalid && (editForm.get('updatedAt')!.dirty || editForm.get('updatedAt')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('updatedAt')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >This field is required.</small
+            >
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('updatedAt')?.errors?.datetimelocal"
+              jhiTranslate="entity.validation.datetimelocal"
+              >This field should be a date and time.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.comments.status" for="field_status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'easyBlogApp.Status.null' | translate }}</option>
+            <option *ngFor="let status of statusValues" [value]="status">{{ 'easyBlogApp.Status.' + status | translate }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="easyBlogApp.comments.author" for="field_author">Author</label>
+          <select
+            class="form-control"
+            id="field_author"
+            data-cy="author"
+            name="author"
+            formControlName="author"
+            [compareWith]="compareAuthors"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="authorsOption" *ngFor="let authorsOption of authorsSharedCollection">{{ authorsOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="easyBlogApp.comments.post" for="field_posts">Post</label>
+          <select
+            class="form-control"
+            id="field_posts"
+            data-cy="post"
+            multiple
+            name="posts"
+            formControlName="posts"
+            [compareWith]="comparePosts"
+          >
+            <option [ngValue]="postsOption" *ngFor="let postsOption of postsSharedCollection">{{ postsOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="easyBlogApp.comments.page" for="field_pages">Page</label>
+          <select
+            class="form-control"
+            id="field_pages"
+            data-cy="page"
+            multiple
+            name="pages"
+            formControlName="pages"
+            [compareWith]="comparePages"
+          >
+            <option [ngValue]="pagesOption" *ngFor="let pagesOption of pagesSharedCollection">{{ pagesOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="easyBlogApp.comments.parent" for="field_parents">Parent</label>
+          <select
+            class="form-control"
+            id="field_parents"
+            data-cy="parent"
+            multiple
+            name="parents"
+            formControlName="parents"
+            [compareWith]="compareComments"
+          >
+            <option [ngValue]="commentsOption" *ngFor="let commentsOption of commentsSharedCollection">{{ commentsOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "easyBlogApp": {
+    "itemTypes": {
+      "home": {
+        "title": "Item Types",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Item Types",
+        "createOrEditLabel": "Создать или отредактировать Item Types",
+        "search": "Найти Item Types",
+        "notFound": "Item Types не найдено"
+      },
+      "created": "Новый Item Types создан с идентификатором {{ param }}",
+      "updated": "Item Types обновлен с идентификатором {{ param }}",
+      "deleted": "Item Types удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Item Types {{ id }}?"
+      },
+      "detail": {
+        "title": "Item Types"
+      },
+      "id": "ID",
+      "name": "Name"
+    }
+  }
+}

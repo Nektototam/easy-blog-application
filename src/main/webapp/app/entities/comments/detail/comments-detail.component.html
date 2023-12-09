@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="comments">
+      <h2 data-cy="commentsDetailsHeading"><span jhiTranslate="easyBlogApp.comments.detail.title">Comments</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ comments.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.content">Content</span></dt>
+        <dd>
+          <span>{{ comments.content }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ comments.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.updatedAt">Updated At</span></dt>
+        <dd>
+          <span>{{ comments.updatedAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'easyBlogApp.Status.' + comments.status }}">{{ comments.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.author">Author</span></dt>
+        <dd>
+          <div *ngIf="comments.author">
+            <a [routerLink]="['/authors', comments.author.id, 'view']">{{ comments.author.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.post">Post</span></dt>
+        <dd>
+          <span *ngFor="let post of comments.posts; let last = last">
+            <a [routerLink]="['/posts', post.id, 'view']">{{ post.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.page">Page</span></dt>
+        <dd>
+          <span *ngFor="let page of comments.pages; let last = last">
+            <a [routerLink]="['/pages', page.id, 'view']">{{ page.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.comments.parent">Parent</span></dt>
+        <dd>
+          <span *ngFor="let parent of comments.parents; let last = last">
+            <a [routerLink]="['/comments', parent.id, 'view']">{{ parent.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/comments', comments.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

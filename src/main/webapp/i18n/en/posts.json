@@ -1,0 +1,35 @@
+{
+  "easyBlogApp": {
+    "posts": {
+      "home": {
+        "title": "Posts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Posts",
+        "createOrEditLabel": "Create or edit a Posts",
+        "search": "Search for Posts",
+        "notFound": "No Posts found"
+      },
+      "created": "A new Posts is created with identifier {{ param }}",
+      "updated": "A Posts is updated with identifier {{ param }}",
+      "deleted": "A Posts is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Posts {{ id }}?"
+      },
+      "detail": {
+        "title": "Posts"
+      },
+      "id": "ID",
+      "title": "Title",
+      "slug": "Slug",
+      "html": "Html",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "publishedAt": "Published At",
+      "status": "Status",
+      "visibility": "Visibility",
+      "author": "Author",
+      "tag": "Tag",
+      "comment": "Comment"
+    }
+  }
+}

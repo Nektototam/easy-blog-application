@@ -1,0 +1,28 @@
+{
+  "easyBlogApp": {
+    "users": {
+      "home": {
+        "title": "Users",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Users",
+        "createOrEditLabel": "Создать или отредактировать Users",
+        "search": "Найти Users",
+        "notFound": "Users не найдено"
+      },
+      "created": "Новый Users создан с идентификатором {{ param }}",
+      "updated": "Users обновлен с идентификатором {{ param }}",
+      "deleted": "Users удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Users {{ id }}?"
+      },
+      "detail": {
+        "title": "Users"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "page": "Page",
+      "post": "Post"
+    }
+  }
+}

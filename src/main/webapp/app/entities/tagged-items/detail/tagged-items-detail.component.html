@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="taggedItems">
+      <h2 data-cy="taggedItemsDetailsHeading"><span jhiTranslate="easyBlogApp.taggedItems.detail.title">Tagged Items</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ taggedItems.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.taggedItems.itemType">Item Type</span></dt>
+        <dd>
+          <span>{{ taggedItems.itemType }}</span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.taggedItems.tag">Tag</span></dt>
+        <dd>
+          <div *ngIf="taggedItems.tag">
+            <a [routerLink]="['/tags', taggedItems.tag.id, 'view']">{{ taggedItems.tag.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.taggedItems.item">Item</span></dt>
+        <dd>
+          <div *ngIf="taggedItems.item">
+            <a [routerLink]="['/item-types', taggedItems.item.id, 'view']">{{ taggedItems.item.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.taggedItems.page">Page</span></dt>
+        <dd>
+          <span *ngFor="let page of taggedItems.pages; let last = last">
+            <a [routerLink]="['/pages', page.id, 'view']">{{ page.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="easyBlogApp.taggedItems.post">Post</span></dt>
+        <dd>
+          <span *ngFor="let post of taggedItems.posts; let last = last">
+            <a [routerLink]="['/posts', post.id, 'view']">{{ post.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/tagged-items', taggedItems.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209060523",
+  "entityTableName": "comments",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "PUBLISHED,DRAFT,APPROVED,UNAPPROVED"
+    }
+  ],
+  "name": "Comments",
+  "relationships": [
+    {
+      "otherEntityName": "authors",
+      "relationshipName": "author",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "posts",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "post",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "pages",
+      "otherEntityRelationshipName": "comment",
+      "relationshipName": "page",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "comments",
+      "otherEntityRelationshipName": "child",
+      "relationshipName": "parent",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "comments",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "child",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}

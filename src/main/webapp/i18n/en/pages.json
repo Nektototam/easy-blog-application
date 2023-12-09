@@ -1,0 +1,35 @@
+{
+  "easyBlogApp": {
+    "pages": {
+      "home": {
+        "title": "Pages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Pages",
+        "createOrEditLabel": "Create or edit a Pages",
+        "search": "Search for Pages",
+        "notFound": "No Pages found"
+      },
+      "created": "A new Pages is created with identifier {{ param }}",
+      "updated": "A Pages is updated with identifier {{ param }}",
+      "deleted": "A Pages is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Pages {{ id }}?"
+      },
+      "detail": {
+        "title": "Pages"
+      },
+      "id": "ID",
+      "title": "Title",
+      "slug": "Slug",
+      "html": "Html",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "publishedAt": "Published At",
+      "status": "Status",
+      "visibility": "Visibility",
+      "author": "Author",
+      "tag": "Tag",
+      "comment": "Comment"
+    }
+  }
+}

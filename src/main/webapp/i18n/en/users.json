@@ -1,0 +1,28 @@
+{
+  "easyBlogApp": {
+    "users": {
+      "home": {
+        "title": "Users",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Users",
+        "createOrEditLabel": "Create or edit a Users",
+        "search": "Search for Users",
+        "notFound": "No Users found"
+      },
+      "created": "A new Users is created with identifier {{ param }}",
+      "updated": "A Users is updated with identifier {{ param }}",
+      "deleted": "A Users is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Users {{ id }}?"
+      },
+      "detail": {
+        "title": "Users"
+      },
+      "id": "ID",
+      "name": "Name",
+      "email": "Email",
+      "page": "Page",
+      "post": "Post"
+    }
+  }
+}

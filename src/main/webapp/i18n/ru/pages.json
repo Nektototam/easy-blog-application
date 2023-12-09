@@ -1,0 +1,35 @@
+{
+  "easyBlogApp": {
+    "pages": {
+      "home": {
+        "title": "Pages",
+        "refreshListLabel": "Обновить список",
+        "createLabel": "Создать новый Pages",
+        "createOrEditLabel": "Создать или отредактировать Pages",
+        "search": "Найти Pages",
+        "notFound": "Pages не найдено"
+      },
+      "created": "Новый Pages создан с идентификатором {{ param }}",
+      "updated": "Pages обновлен с идентификатором {{ param }}",
+      "deleted": "Pages удален с идентификатором {{ param }}",
+      "delete": {
+        "question": "Вы уверены что хотите удалить Pages {{ id }}?"
+      },
+      "detail": {
+        "title": "Pages"
+      },
+      "id": "ID",
+      "title": "Title",
+      "slug": "Slug",
+      "html": "Html",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "publishedAt": "Published At",
+      "status": "Status",
+      "visibility": "Visibility",
+      "author": "Author",
+      "tag": "Tag",
+      "comment": "Comment"
+    }
+  }
+}

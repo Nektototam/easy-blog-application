@@ -1,0 +1,170 @@
+<div>
+  <h2 id="page-heading" data-cy="CommentsHeading">
+    <span jhiTranslate="easyBlogApp.comments.home.title">Comments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyBlogApp.comments.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-comments"
+        [routerLink]="['/comments/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="easyBlogApp.comments.home.createLabel">Create a new Comments</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="easyBlogApp.comments.home.search">Search for Comments</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'easyBlogApp.comments.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="comments?.length === 0">
+    <span jhiTranslate="easyBlogApp.comments.home.notFound">No Comments found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="comments && comments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="content">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.content">Content</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="createdAt">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.createdAt">Created At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="updatedAt">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.updatedAt">Updated At</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.status">Status</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="author.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.author">Author</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="post.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.post">Post</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="page.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.page">Page</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="parent.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.comments.parent">Parent</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let comments of comments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/comments', comments.id, 'view']">{{ comments.id }}</a>
+          </td>
+          <td>{{ comments.content }}</td>
+          <td>{{ comments.createdAt | formatMediumDatetime }}</td>
+          <td>{{ comments.updatedAt | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'easyBlogApp.Status.' + comments.status }}">{{ comments.status }}</td>
+          <td>
+            <div *ngIf="comments.author">
+              <a [routerLink]="['/authors', comments.author.id, 'view']">{{ comments.author.id }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let post of comments.posts; let last = last">
+              <a class="form-control-static" [routerLink]="['/posts', post.id, 'view']">{{ post.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let page of comments.pages; let last = last">
+              <a class="form-control-static" [routerLink]="['/pages', page.id, 'view']">{{ page.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let parent of comments.parents; let last = last">
+              <a class="form-control-static" [routerLink]="['/comments', parent.id, 'view']">{{ parent.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/comments', comments.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </a>
+
+              <a [routerLink]="['/comments', comments.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(comments)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

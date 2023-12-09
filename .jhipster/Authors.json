@@ -1,0 +1,22 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209055823",
+  "entityTableName": "authors",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Authors",
+  "relationships": []
+}

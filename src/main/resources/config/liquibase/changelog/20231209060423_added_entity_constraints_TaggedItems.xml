@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity TaggedItems.
+    -->
+    <changeSet id="20231209060423-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="tagged_items"
+                                 constraintName="fk_tagged_items__tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tags"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="item_id"
+                                 baseTableName="tagged_items"
+                                 constraintName="fk_tagged_items__item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item_types"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tagged_items_id"
+                                 baseTableName="rel_tagged_items__page"
+                                 constraintName="fk_rel_tagged_items__page__tagged_items_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tagged_items"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="page_id"
+                                 baseTableName="rel_tagged_items__page"
+                                 constraintName="fk_rel_tagged_items__page__page_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pages"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tagged_items_id"
+                                 baseTableName="rel_tagged_items__post"
+                                 constraintName="fk_rel_tagged_items__post__tagged_items_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tagged_items"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="rel_tagged_items__post"
+                                 constraintName="fk_rel_tagged_items__post__post_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="posts"
+                                 />
+    </changeSet>
+</databaseChangeLog>

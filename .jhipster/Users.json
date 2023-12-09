@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209060123",
+  "entityTableName": "users",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Users",
+  "relationships": [
+    {
+      "otherEntityName": "pages",
+      "otherEntityRelationshipName": "author",
+      "relationshipName": "page",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "posts",
+      "otherEntityRelationshipName": "author",
+      "relationshipName": "post",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}

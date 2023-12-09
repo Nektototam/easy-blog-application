@@ -1,0 +1,150 @@
+<div>
+  <h2 id="page-heading" data-cy="TaggedItemsHeading">
+    <span jhiTranslate="easyBlogApp.taggedItems.home.title">Tagged Items</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="easyBlogApp.taggedItems.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-tagged-items"
+        [routerLink]="['/tagged-items/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="easyBlogApp.taggedItems.home.createLabel">Create a new Tagged Items</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="easyBlogApp.taggedItems.home.search"
+          >Search for Tagged Items</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'easyBlogApp.taggedItems.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        <button class="btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+          <fa-icon icon="trash-alt"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="taggedItems?.length === 0">
+    <span jhiTranslate="easyBlogApp.taggedItems.home.notFound">No Tagged Items found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="taggedItems && taggedItems.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="itemType">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.taggedItems.itemType">Item Type</span>
+              <fa-icon class="p-1" *ngIf="!currentSearch" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tag.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.taggedItems.tag">Tag</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="item.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.taggedItems.item">Item</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="page.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.taggedItems.page">Page</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="post.id">
+            <div class="d-flex">
+              <span jhiTranslate="easyBlogApp.taggedItems.post">Post</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let taggedItems of taggedItems; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/tagged-items', taggedItems.id, 'view']">{{ taggedItems.id }}</a>
+          </td>
+          <td>{{ taggedItems.itemType }}</td>
+          <td>
+            <div *ngIf="taggedItems.tag">
+              <a [routerLink]="['/tags', taggedItems.tag.id, 'view']">{{ taggedItems.tag.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="taggedItems.item">
+              <a [routerLink]="['/item-types', taggedItems.item.id, 'view']">{{ taggedItems.item.id }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let page of taggedItems.pages; let last = last">
+              <a class="form-control-static" [routerLink]="['/pages', page.id, 'view']">{{ page.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let post of taggedItems.posts; let last = last">
+              <a class="form-control-static" [routerLink]="['/posts', post.id, 'view']">{{ post.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <a [routerLink]="['/tagged-items', taggedItems.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </a>
+
+              <a [routerLink]="['/tagged-items', taggedItems.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </a>
+
+              <button type="submit" (click)="delete(taggedItems)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

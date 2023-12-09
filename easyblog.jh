@@ -1,0 +1,79 @@
+enum Status {
+  PUBLISHED, DRAFT, APPROVED, UNAPPROVED
+}
+
+enum Visibility {
+  PUBLIC, PRIVATE
+}
+
+entity Authors {
+  name String required
+  email String
+  url String
+}
+
+entity ItemTypes {
+  name String required
+}
+
+entity Tags {
+  name String required
+  description String
+}
+
+entity Users {
+  name String
+  email String
+}
+
+entity Pages {
+  title String
+  slug String
+  html TextBlob
+  createdAt ZonedDateTime
+  updatedAt ZonedDateTime
+  publishedAt ZonedDateTime
+  status Status
+  visibility Visibility
+}
+
+entity Posts {
+  title String
+  slug String
+  html TextBlob
+  createdAt ZonedDateTime
+  updatedAt ZonedDateTime
+  publishedAt ZonedDateTime
+  status Status
+  visibility Visibility
+}
+
+entity TaggedItems {
+  itemType String required
+}
+
+entity Comments {
+  content TextBlob required
+  createdAt ZonedDateTime required
+  updatedAt ZonedDateTime required
+  status Status
+}
+
+relationship ManyToMany {
+  Pages{author} to Users{page}
+  Posts{author} to Users{post}
+  TaggedItems{page} to Pages{tag}
+  TaggedItems{post} to Posts{tag}
+  Comments{post} to Posts{comment}
+  Comments{page} to Pages{comment}
+  Comments{parent} to Comments{child}
+}
+
+
+relationship ManyToOne {
+  TaggedItems{tag} to Tags
+  TaggedItems{item} to ItemTypes
+  
+  Comments{author} to Authors
+  
+}

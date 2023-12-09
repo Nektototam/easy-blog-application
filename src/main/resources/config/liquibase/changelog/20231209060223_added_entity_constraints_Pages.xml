@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Pages.
+    -->
+    <changeSet id="20231209060223-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="pages_id"
+                                 baseTableName="rel_pages__author"
+                                 constraintName="fk_rel_pages__author__pages_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pages"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="author_id"
+                                 baseTableName="rel_pages__author"
+                                 constraintName="fk_rel_pages__author__author_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 />
+    </changeSet>
+</databaseChangeLog>

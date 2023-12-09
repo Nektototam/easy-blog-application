@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20231209060423",
+  "entityTableName": "tagged_items",
+  "fields": [
+    {
+      "fieldName": "itemType",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "TaggedItems",
+  "relationships": [
+    {
+      "otherEntityName": "tags",
+      "relationshipName": "tag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "itemTypes",
+      "relationshipName": "item",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pages",
+      "otherEntityRelationshipName": "tag",
+      "relationshipName": "page",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "posts",
+      "otherEntityRelationshipName": "tag",
+      "relationshipName": "post",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ]
+}
